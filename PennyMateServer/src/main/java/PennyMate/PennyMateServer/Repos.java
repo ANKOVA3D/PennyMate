@@ -4,6 +4,7 @@ package PennyMate.PennyMateServer;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -40,6 +41,7 @@ public class Repos {
     
     public User findByUsername(String username) {
         String sql = "SELECT * FROM users WHERE username = ?";
+        try {
         return jdbcTemplate.queryForObject(sql, new Object[]{username}, (rs, rowNum) -> new User(
                 rs.getInt("id"),
                 rs.getString("username"),
@@ -47,12 +49,37 @@ public class Repos {
                 rs.getString("password_hash")
                 
         ));
+        } catch (EmptyResultDataAccessException e) {
+        	return null;
+        }
     }
 
     // Metodo per aggiungere un nuovo utente
-    public int addUser(User user) {
-        String sql = "INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)";
-        return jdbcTemplate.update(sql, user.getName(), user.getEmail(), user.getPassword());
+    public String addUser(User user) {
+    	
+    	
+    	
+        // Controllo se l'username esiste già
+        String checkUsernameSql = "SELECT COUNT(*) FROM users WHERE username = ?";
+        int usernameCount = jdbcTemplate.queryForObject(checkUsernameSql, Integer.class, user.getName());
+
+        if (usernameCount > 0) {
+            return "Username già in uso!";
+        }
+
+        // Controllo se l'email esiste già
+        String checkEmailSql = "SELECT COUNT(*) FROM users WHERE email = ?";
+        int emailCount = jdbcTemplate.queryForObject(checkEmailSql, Integer.class, user.getEmail());
+
+        if (emailCount > 0) {
+            return "Email già in uso!";
+        }
+
+        // Se l'username e l'email non sono già usati, inserisco il nuovo utente
+        String insertSql = "INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)";
+        int rowsAffected = jdbcTemplate.update(insertSql, user.getName(), user.getEmail(), user.getPassword());
+
+        return rowsAffected > 0 ? "Registrazione avvenuta con successo!" : "Errore durante la registrazione.";
     }
 
     // Metodo per aggiornare un utente esistente

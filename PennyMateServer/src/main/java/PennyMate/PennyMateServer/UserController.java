@@ -1,9 +1,13 @@
 package PennyMate.PennyMateServer;
 
-
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +21,7 @@ import PennyMate.Entity.User;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = "http://localhost")
 public class UserController {
 
     @Autowired
@@ -24,44 +29,83 @@ public class UserController {
 
     // API per ottenere tutti gli utenti
     @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = userService.getAllUsers();
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    
+    // API per login
     @PostMapping("/login")
-    public String login(@RequestBody User user) {
-    	String RealPW = userService.findByUsername(user.getName()).getPassword();     
-        if (RealPW.equals(user.getPassword())) {
-            return "Login effettuato con successo!";
+    public ResponseEntity<Map<String, String>> login(@RequestBody User user) {
+        Map<String, String> response = new HashMap<>();
+        User foundUser = userService.findByUsername(user.getName());
+
+        if (foundUser == null) { // Controlla se l'utente esiste
+            response.put("message", "Credenziali non valide");
+            return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+        }
+
+        String realPassword = foundUser.getPassword();
+        if (realPassword.equals(user.getPassword())) {
+            response.put("message", "Login effettuato con successo!");
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
-            return "Credenziali non valide";
+            response.put("message", "Credenziali non valide");
+            return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
     }
 
-    
     // API per ottenere un singolo utente tramite ID
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable int id) {
-        return userService.getUserById(id);
+    public ResponseEntity<User> getUserById(@PathVariable int id) {
+        User user = userService.getUserById(id);
+        if (user != null) {
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     // API per aggiungere un nuovo utente
     @PostMapping("/register")
-    public int addUser(@RequestBody User user) {
-        return userService.addUser(user);
+    public ResponseEntity<Map<String, String>> addUser(@RequestBody User user) {
+        Map<String, String> response = new HashMap<>();
+        try {
+            userService.addUser(user);
+            response.put("message", "Utente registrato con successo");
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        } catch (Exception e) {
+            response.put("message", "Errore durante la registrazione");
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     // API per aggiornare un utente esistente
     @PutMapping("/{id}")
-    public int updateUser(@PathVariable int id, @RequestBody User user) {
+    public ResponseEntity<Map<String, String>> updateUser(@PathVariable int id, @RequestBody User user) {
+        Map<String, String> response = new HashMap<>();
         user.setId(id);
-        return userService.updateUser(user);
+        int updatedRows = userService.updateUser(user);
+        if (updatedRows > 0) {
+            response.put("message", "Utente aggiornato con successo");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            response.put("message", "Utente non trovato");
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
     }
 
     // API per eliminare un utente
     @DeleteMapping("/{id}")
-    public int deleteUser(@PathVariable int id) {
-        return userService.deleteUser(id);
+    public ResponseEntity<Map<String, String>> deleteUser(@PathVariable int id) {
+        Map<String, String> response = new HashMap<>();
+        int deletedRows = userService.deleteUser(id);
+        if (deletedRows > 0) {
+            response.put("message", "Utente eliminato con successo");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            response.put("message", "Utente non trovato");
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
     }
 }
