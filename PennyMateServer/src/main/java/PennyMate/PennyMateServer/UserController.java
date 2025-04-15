@@ -1,7 +1,7 @@
 package PennyMate.PennyMateServer;
 
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import PennyMate.Entity.User;
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/users")
@@ -26,7 +27,7 @@ public class UserController {
 
     @Autowired
     private Repos userService;
-
+ 
     // API per ottenere tutti gli utenti
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
@@ -34,26 +35,38 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    // API per login
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> login(@RequestBody User user) {
+    public ResponseEntity<Map<String, String>> login(@RequestBody User user, HttpServletRequest request) {
         Map<String, String> response = new HashMap<>();
+        
+        // Verifica se l'utente esiste nel database
         User foundUser = userService.findByUsername(user.getName());
 
-        if (foundUser == null) { // Controlla se l'utente esiste
+        if (foundUser == null || !foundUser.getPassword().equals(user.getPassword())) {
             response.put("message", "Credenziali non valide");
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
 
-        String realPassword = foundUser.getPassword();
-        if (realPassword.equals(user.getPassword())) {
-            response.put("message", "Login effettuato con successo!");
-            return new ResponseEntity<>(response, HttpStatus.OK);
+        // Salva l'utente nella sessione
+        request.getSession().setAttribute("user", foundUser);
+
+        response.put("message", "Login effettuato con successo");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+
+    
+    @GetMapping("/me")
+    public ResponseEntity<?> getCurrentUser(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        if (user != null) {
+            return ResponseEntity.ok(Map.of("username", user.getName())); // Ritorna il nome utente
         } else {
-            response.put("message", "Credenziali non valide");
-            return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Non autenticato"); // Se l'utente non è loggato
         }
     }
+
+
 
     // API per ottenere un singolo utente tramite ID
     @GetMapping("/{id}")

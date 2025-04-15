@@ -1,2 +1,8 @@
-PennyMate\PennyMateServer\Controller.class
+PennyMate\PennyMateServer\UserController.class
+PennyMate\PennyMateServer\ServiceController.class
+PennyMate\Security\SecurityConfig.class
+PennyMate\Entity\User.class
+PennyMate\PennyMateServer\Repos.class
 PennyMate\PennyMateServer\PennyMateServerApplication.class
+PennyMate\PennyMateServer\TransactionRepos.class
+PennyMate\Security\CorsConfig.class
