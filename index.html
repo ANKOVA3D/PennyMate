@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Aggiungi il link a Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Stili esistenti mantengono la stessa struttura */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .sidebar {
+            width: 260px;
+            background: #1e293b;
+            color: white;
+            padding: 20px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+        }
+        .sidebar h2 {
+            margin-bottom: 20px;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+        }
+        .sidebar ul .active {
+            background: #334155;
+            border-radius: 5px;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            margin-left: 280px;
+            width: calc(100% - 280px);
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .stat-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .charts, .transactions, .appointments, .reports {
+            background: white;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background: #1e293b;
+            color: white;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .badge {
+            background: red;
+            color: white;
+            padding: 3px 7px;
+            border-radius: 50%;
+            font-size: 12px;
+        }
+
+        /* Ridurre il grafico */
+        #balanceChart {
+            max-width: 400px;  /* Impostare la larghezza massima */
+            max-height: 200px; /* Impostare l'altezza massima */
+            margin: auto;
+        }
+
+        .report-table {
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <!-- Sidebar contenuto rimasto invariato -->
+    </div>
+
+    <div class="main-content">
+        <header>
+            <h1>Financial Dashboard</h1>
+            <input type="text" placeholder="Search here">
+            <div class="user-profile">
+                <span id="userNameDisplay">Utente</span>
+            </div>
+        </header>
+
+        <section class="stats">
+            <div class="stat-box">
+                <h3>Total Revenue</h3>
+                <p id="totalRevenue">$0</p>
+            </div>
+            <div class="stat-box">
+                <h3>Total Expenses</h3>
+                <p id="totalExpenses">$0</p>
+            </div>
+            <div class="stat-box">
+                <h3>Balance</h3>
+                <p id="balance">$0</p>
+            </div>
+        </section>
+		
+		<h3>Le tue Spese</h3>
+            <div class="expense-list" id="expenseList"></div>
+        </section>
+
+        <!-- Sezione per le spese -->
+        <section class="expenses-section">
+            <h3>Aggiungi una Nuova Spesa</h3>
+            <form id="expenseForm">
+                <input type="text" id="expenseName" placeholder="Nome della spesa" required>
+                <input type="number" id="expenseAmount" placeholder="Importo" required>
+                <button type="submit">Aggiungi Spesa</button>
+            </form>
+
+        <!-- Sezione per i guadagni -->
+        <section class="earnings-section">
+            <h3>Aggiungi un Nuovo Guadagno</h3>
+            <form id="earningsForm">
+                <input type="text" id="earningName" placeholder="Nome del guadagno" required>
+                <input type="number" id="earningAmount" placeholder="Importo" required>
+                <button type="submit">Aggiungi Guadagno</button>
+            </form>
+
+            <h3>I tuoi Guadagni</h3>
+            <div class="earning-list" id="earningList"></div>
+        </section>
+
+        <!-- Sezione per il grafico -->
+        <section class="charts">
+            <h3>Grafico del Saldo</h3>
+            <canvas id="balanceChart"></canvas>
+        </section>
+
+        <!-- Sezione per Report Dettagliato -->
+        <section class="reports">
+            <h3>Report Dettagliato</h3>
+            <div class="report-table">
+                <h4>Spese Dettagliate</h4>
+                <table id="expenseReportTable">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Importo</th>
+                            <th>Data</th>
+                            <th>Azione</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Le righe delle spese verranno inserite qui dinamicamente -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="report-table">
+                <h4>Guadagni Dettagliati</h4>
+                <table id="earningReportTable">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Importo</th>
+                            <th>Data</th>
+                            <th>Azione</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Le righe dei guadagni verranno inserite qui dinamicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Arrays per memorizzare le spese e i guadagni
+        let expenses = [];
+        let earnings = [];
+
+        // Funzione per aggiungere una spesa
+        document.getElementById('expenseForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const expenseName = document.getElementById('expenseName').value;
+            const expenseAmount = parseFloat(document.getElementById('expenseAmount').value);
+            const expenseDate = new Date().toLocaleDateString();
+
+            const expense = { name: expenseName, amount: expenseAmount, date: expenseDate };
+            expenses.push(expense);
+
+            document.getElementById('expenseName').value = '';
+            document.getElementById('expenseAmount').value = '';
+            renderExpenseReport();
+            updateBalance();
+        });
+
+        // Funzione per aggiungere un guadagno
+        document.getElementById('earningsForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const earningName = document.getElementById('earningName').value;
+            const earningAmount = parseFloat(document.getElementById('earningAmount').value);
+            const earningDate = new Date().toLocaleDateString();
+
+            const earning = { name: earningName, amount: earningAmount, date: earningDate };
+            earnings.push(earning);
+
+            document.getElementById('earningName').value = '';
+            document.getElementById('earningAmount').value = '';
+            renderEarningReport();
+            updateBalance();
+        });
+
+        // Funzione per visualizzare il report delle spese
+        function renderExpenseReport() {
+            const expenseTableBody = document.getElementById('expenseReportTable').getElementsByTagName('tbody')[0];
+            expenseTableBody.innerHTML = '';  // Resetta la tabella
+
+            expenses.forEach((expense) => {
+                const row = expenseTableBody.insertRow();
+                row.insertCell(0).textContent = expense.name;
+                row.insertCell(1).textContent = `$${expense.amount.toFixed(2)}`;
+                row.insertCell(2).textContent = expense.date;
+                row.insertCell(3).innerHTML = `<button onclick="removeExpense(${expenses.indexOf(expense)})">Rimuovi</button>`;
+            });
+        }
+
+        // Funzione per visualizzare il report dei guadagni
+        function renderEarningReport() {
+            const earningTableBody = document.getElementById('earningReportTable').getElementsByTagName('tbody')[0];
+            earningTableBody.innerHTML = '';  // Resetta la tabella
+
+            earnings.forEach((earning) => {
+                const row = earningTableBody.insertRow();
+                row.insertCell(0).textContent = earning.name;
+                row.insertCell(1).textContent = `$${earning.amount.toFixed(2)}`;
+                row.insertCell(2).textContent = earning.date;
+                row.insertCell(3).innerHTML = `<button onclick="removeEarning(${earnings.indexOf(earning)})">Rimuovi</button>`;
+            });
+        }
+
+        // Funzione per aggiornare il saldo e il grafico
+        function updateBalance() {
+            const totalRevenue = earnings.reduce((total, earning) => total + earning.amount, 0);
+            const totalExpenses = expenses.reduce((total, expense) => total + expense.amount, 0);
+            const balance = totalRevenue - totalExpenses;
+            document.getElementById('balance').textContent = `$${balance.toFixed(2)}`;
+
+            // Aggiorna il grafico
+            updateChart(totalRevenue, totalExpenses);
+        }
+
+        // Funzione per aggiornare il grafico
+        function updateChart(totalRevenue, totalExpenses) {
+            const ctx = document.getElementById('balanceChart').getContext('2d');
+            if (window.chart) {
+                window.chart.destroy();  // Distruggi il grafico precedente se esiste
+            }
+            window.chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Guadagni', 'Spese'],
+                    datasets: [{
+                        label: 'Totale',
+                        data: [totalRevenue, totalExpenses],
+                        backgroundColor: ['#4CAF50', '#F44336'],
+                        borderColor: ['#388E3C', '#D32F2F'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Funzione per rimuovere una spesa
+        function removeExpense(expenseIndex) {
+            expenses.splice(expenseIndex, 1);
+            renderExpenseReport();
+            updateBalance();
+        }
+
+        // Funzione per rimuovere un guadagno
+        function removeEarning(earningIndex) {
+            earnings.splice(earningIndex, 1);
+            renderEarningReport();
+            updateBalance();
+        }
+    </script>
+</body>
+</html>
