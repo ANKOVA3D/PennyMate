@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Pennymate</h2>
+    <nav>
+      <ul>
+        <li class="active"><i class="fas fa-home"></i> Overview</li>
+        <li><i class="fas fa-credit-card"></i> Payments</li>
+        <li><i class="fas fa-chart-line"></i> Analytics</li>
+        <li><i class="fas fa-cogs"></i> Services</li>
+        <li><i class="fas fa-envelope"></i> Messages <span class="badge">6</span></li>
+		<a href="profile.html"><li><i class="fas fa-user-edit"></i> Modifica Profilo</li></a>
+      </ul>
+    </nav>
+    <div class="support">
+      <p>Helps</p>
+      <p>Settings</p>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <header>
+      <h1>Financial Dashboard</h1>
+      <input type="text" placeholder="Search here">
+      <div class="user-profile">
+        <span id="userNameDisplay">Utente</span>
+      </div>
+    </header>
+
+    <section class="stats">
+      <div class="stat-box">
+        <h3>Total Revenue</h3>
+        <p id="totalIncome">$0</p>
+      </div>
+      <div class="stat-box">
+        <h3>Total Expenses</h3>
+        <p id="totalExpenses">$0</p>
+      </div>
+      <div class="stat-box">
+        <h3>Net Profit</h3>
+        <p id="netProfit">$0</p>
+      </div>
+      <div class="stat-box">
+        <h3>Cash Balance</h3>
+        <p id="cashBalance">$0</p>
+      </div>
+    </section>
+
+    <section class="charts">
+      <h3>Profit and Loss</h3>
+      <h3>Revenue and Expenses Over Time</h3>
+    </section>
+
+    <section class="transactions">
+      <h2>Client Transactions Table</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID No</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody id="transactionsTable">
+          <!-- Popolato dinamicamente -->
+        </tbody>
+      </table>
+    </section>
+
+    <section class="add-transaction">
+  <h2>Aggiungi Transazione</h2>
+  <form id="transactionForm">
+  
+    <label for="category">Categoria:</label>
+    <select id="category" name="category" required>
+      <option value="">Seleziona una categoria</option>
+    </select><br><br>
+
+    <label for="type">Tipo:</label>
+    <select id="type" name="type" required>
+      <option value="true">Entrata</option>
+      <option value="false">Uscita</option>
+    </select><br><br>
+
+    <label for="amount">Importo:</label>
+    <input type="number" id="amount" name="amount" required><br><br>
+
+    <label for="description">Descrizione:</label>
+    <input type="text" id="description" name="description"><br><br>
+
+    <button type="submit">Aggiungi Transazione</button>
+  </form>
+</section>
+
+<script src="script.js"></script>
+
+</body>
+</html>
