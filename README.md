@@ -1,3 +1,6 @@
-# l'index all'inzio è quello che ho fatto il 16/04 a tepsit aggiungendo quasi tutte le funzionalità di pennymate al sito
+# ReadMe file di PennyMate
+## Come utilizzarlo
 
 Il backend è contenuto sul ramo master, quindi per scaricarlo è necessario Clonare il ramo master, e compilare la classe Java "PennyMateApplication.java".
+Mentre il frontend è contenuto sul ramo main, ovvero questo.
+Per caricare il databse basta è presente un file apposito.
