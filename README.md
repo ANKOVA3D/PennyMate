@@ -8,7 +8,7 @@ Scaricare il BackEnd, FrontEnd, ed il Database.
 
 
 
-### Come scaricarlo.
+### Come scaricarlo
 
 Il backend è contenuto sul ramo master, quindi per scaricarlo è necessario Clonare il ramo master.
 Mentre il frontend è contenuto sul ramo main.
