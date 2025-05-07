@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Modifica Profilo</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-  
+  <link rel="stylesheet" href="style.css" />
   <style>
     .form-section {
       margin: 40px auto;
@@ -14,7 +14,6 @@
       padding: 30px;
       border-radius: 15px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-      margin-top: 120px;
     }
 
     .form-section h2 {
@@ -77,12 +76,30 @@
         padding: 20px;
       }
 
-      
+      .sidebar {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
-  
+  <div class="sidebar">
+    <h2>Pennymate</h2>
+    <nav>
+      <ul>
+        <li><i class="fas fa-home"></i> Overview</li>
+        <li class="active"><i class="fas fa-user"></i> Modifica Profilo</li>
+        <li><i class="fas fa-chart-line"></i> Analytics</li>
+        <li><i class="fas fa-cogs"></i> Services</li>
+        <li><i class="fas fa-envelope"></i> Messages <span class="badge">6</span></li>
+      </ul>
+    </nav>
+    <div class="support">
+      <p>Helps</p>
+      <p>Settings</p>
+    </div>
+  </div>
+
   <div class="main-content">
     <header>
       <h1>Modifica Profilo Utente</h1>
