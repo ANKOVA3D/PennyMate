@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: PennyMate.PennyMateServer.PennyMateServerApplicationTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.670 s -- in PennyMate.PennyMateServer.PennyMateServerApplicationTests
