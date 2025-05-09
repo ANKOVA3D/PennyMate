@@ -1,4 +1,4 @@
-package PennyMate.Transaction;
+package PennyMate.Entity;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
