@@ -11,25 +11,29 @@
       @font-face {
         font-family: 'Phi Roman';
         src: url('fonts/phi-roman.woff2') format('woff2'),
-          url('fonts/phi-roman.ttf') format('truetype');
+        url('fonts/phi-roman.ttf') format('truetype');
         font-weight: normal;
         font-style: normal;
       }
 
       /* Impostazioni generali per il corpo della pagina */
+
       body {
         font-family: 'Phi Roman', Arial, sans-serif;
         margin: 0;
         padding: 0;
         background-color: #f5f5f5;
       }
-	
+      .main-structure {
+        display: grid;
+        grid-template-columns: 1fr ; /* two equal-width columns */
+      }
       .banner {
         margin-top: 10px;
         margin-bottom: 60px;
         
         width: 100%;
-      height: 100%px;
+        height: 100%px;
         height: 80px;
         background-image: url('images/banner_vert.png'); /* percorso relativo */
         background-size: contain;
@@ -42,8 +46,14 @@
       .main-content {
         flex-grow: 1;
         padding: 0 20px 20px 20px;
-        margin-left: 280px;
-        width: calc(100% - 280px);
+        margin-left: 240px;
+        width: calc(100% - 250px);
+        display: flex; /* Enable flexbox */
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items horizontally */
+        
+        min-height: 100vh; /* Full viewport height */
+        box-sizing: border-box; /* Include padding in the height calculation */
       }
 
       /* Header fisso in cima alla pagina */
@@ -130,7 +140,7 @@
         max-width: 1320px;
         width: 100%;
         margin-top: 100px;
-        margin-left: 30px;
+        margin-left: 75px;
         background: white;
         border-radius: 24px;
         padding: 10px;
@@ -153,6 +163,9 @@
         margin-top: 0; /* Remove any additional margin above Weekly/Monthly Statistics */
         width: 100%;
         align-items: flex-start;
+        max-width: 1320px; /* Optional: Set a maximum width for consistency */
+        
+        
       }
 
       /* Sezione delle statistiche */
@@ -402,6 +415,9 @@
         min-width: 1340px;
         max-width: 1340px;
         box-sizing: border-box; /* Ensure padding is included in width/height */
+        max-width: 1320px; /* Optional: Set a maximum width for consistency */
+        margin-bottom: 20px; /* Add spacing between sections */
+        margin-left: 75px;
       }
 
       .transactions h2 {
@@ -455,6 +471,12 @@
       #content-area {
         opacity: 1;
         transition: opacity 0.2s ease-in-out; /* Reduced duration for quicker fade effect */
+        display: flex; /* Enable flexbox */
+        width: auto;
+        align-items: center; /* Center content vertically */
+        height: 100%; /* Ensure it takes the full height of the parent */
+        
+        flex-direction: column; /* Stack items vertically if there are multiple elements */
       }
 
       /* Hidden state for fade-out */
@@ -465,6 +487,7 @@
       .banner a {
         display: block; /* Ensure the link covers the entire banner */
         text-decoration: none; /* Remove underline */
+        pointer-events: none; /* Disable all interactions */
       }
 
       .banner a:hover img {
@@ -572,13 +595,50 @@
         background-color: #024bb5;
       }
 
+      
       .button-group {
         display: flex; /* Use flexbox to align buttons inline */
         gap: 5px; /* Add spacing between the buttons */
+        
+        
       }
 
-      
+      .cancel-button {
+        margin-top: 10px;
+        background-color: #024bb5;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 10px; /* Make the button circular */
+        cursor: pointer;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow */
+        
 
+      }
+
+      .button-group button {
+        margin-top: 10px;
+        background-color: #024bb5;
+        color: white;
+        border: none;
+        padding: 10px; /* Ensure both buttons have the same padding */
+        border-radius: 10px; /* Ensure both buttons have the same border radius */
+        cursor: pointer;
+        font-size: 16px; /* Ensure both buttons have the same font size */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow */
+        width: 35px; /* Optional: Set a fixed width if needed */
+      }
+
+      .cancel-button:hover {
+        background-color: #d9534f;
+      }
       .confirm-button {
         margin-top: 10px;
         background-color: #024bb5;
@@ -899,137 +959,151 @@
       .growth-icon.fa-arrow-down {
         color: #dc3545; /* Red for decline */
       }
+      #weeklyBudgetEditBox{
+        border-radius: 15px;
+        background-color: #0148ac;
+        height: auto;
+        
+      }
+
+      #weeklyBudgetEditNumber{
+        margin-left: 15px;
+        height: 0px;
+        display: flex;
+        justify-content: center; /* center horizontally */
+        align-items: center;     /* center vertically */
+      }
+      
+      .budget-edit-input::-webkit-outer-spin-button,
+      .budget-edit-input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+
+      .budget-edit-input {
+        font-family: inherit;
+        font-size: inherit;
+        width: 100%;
+        box-sizing: border-box; /* ensures padding doesn't overflow */
+        padding: 8px; /* optional */
+        border: 1px solid #ccc;
+        border: none;
+        background: transparent;
+        outline: none;/* optional: match surrounding text */
+        color: inherit;       /* optional: inherit text color */
+        font-weight: bold;
+        -moz-appearance: textfield; /* Firefox */
+      }
+      
     </style>
   </head>
   <body>
-    <div class="sidebar">
-	<div class="banner">
-  <a href="index.html" data-page="dashboard.html">
-    <img src="images/banner_vert.png" alt="Banner" style="width: 100%; height: 80px; object-fit: contain;">
-  </a>
-</div>
-      
-      <nav>
-        <h4>Menu</h4>
-        <ul>
-  <li class="active">
-    <a href="#" id="overviewLink" data-page="dashboard.html">
-      <i class="fas fa-home"></i> Overview
-    </a>
-  </li>
-  <li>
-    <a href="#" id="paymentsLink" data-page="payments.html">
-      <i class="fas fa-credit-card"></i> Payments
-    </a>
-  </li>
-  <li>
-    <a href="#" id="analyticsLink" data-page="analytics.html">
-      <i class="fas fa-chart-line"></i> Analytics
-    </a>
-  </li>
-  <li>
-    <a href="#" id="servicesLink" data-page="services.html">
-      <i class="fas fa-cogs"></i> Services
-    </a>
-  </li>
-  <li>
-    <a href="#" id="profileLink" data-page="profile.html">
-      <i class="fas fa-user-edit"></i> Edit Profile
-    </a>
-  </li>
-  <li>
-    <a href="#" id="helpLink" data-page="help.html">
-      <i class="far fa-question-circle"></i> Help
-    </a>
-  </li>
-</ul>
-      </nav>
-      <div class="support">
-        <h4>Support</h4>
-        <ul>
-            <li>
-              <a href="profile.html">
-                  <i class="far fa-question-circle"></i>  Help
+  <section class = "main-structure">
+      <div class="sidebar">
+            <div class="banner">
+              <a href="index.html" data-page="dashboard.html">
+                <img src="images/banner_vert.png" alt="Banner" style="width: 100%; height: 80px; object-fit: contain;">
               </a>
-            </li>
-        </ul>
-      </div>
-    </div>
-    <div class="main-content">
-      <header>
-        <h1>Dashboard</h1>
-        <div class="header-right">
-          <div class="search-box">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Search here">
-          </div>
-          <div class="user-profile">
-            <span id="userNameDisplay">Utente</span>
-          </div>
-          <div class="language-changer">
-            <select id="languageSelect">
-              <option value="en" selected>English</option>
-              <option value="it">Italiano</option>
-              <option value="fr">Français</option>
-              <option value="es">Español</option>
-            </select>
-          </div>
+            </div>
+            
+            <nav>
+              <h4>Menu</h4>
+              <ul>
+        <li class="active">
+          <a href="#" id="overviewLink" data-page="dashboard.html">
+            <i class="fas fa-home"></i> Overview
+          </a>
+        </li>
+        
+        <li>
+          <a href="#" id="analyticsLink" data-page="analytics.html">
+            <i class="fas fa-chart-line"></i> Analytics
+          </a>
+        </li>
+        
+        <li>
+          <a href="#" id="profileLink" data-page="profile.html">
+            <i class="fas fa-user-edit"></i> Edit Profile
+          </a>
+        </li>
+        
+      </ul>
+            </nav>
+            <div class="support">
+              <h4>Support</h4>
+              <ul>
+                  <li>
+                    <a href="profile.html">
+                        <i class="far fa-question-circle"></i>  Help
+                    </a>
+                  </li>
+              </ul>
+            </div>
         </div>
-      </header>
-      
-      <div id="content-area">
-        <!-- Dynamic content will load here -->
-        
-        
+        <div class="main-content">
+          <header>
+            <h1>Dashboard</h1>
+            <div class="header-right">
+              <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search here">
+              </div>
+              <div class="user-profile">
+                <span id="userNameDisplay">Utente</span>
+              </div>
+              <div class="language-changer">
+                <select id="languageSelect">
+                  <option value="en" selected>English</option>
+                  <option value="it">Italiano</option>
+                  <option value="fr">Français</option>
+                  <option value="es">Español</option>
+                </select>
+              </div>
+            </div>
+          </header>
+          
+          <div id="content-area">
+            <!-- Dynamic content will load here -->
+            
+            
 
 
 
+          </div>
+          
+          
       </div>
-    </div>
+  </section>
+  
     <script>
+//dashboard start
+
+// Function to hide the box
+
+
+
+function showDiv(id) {
+  document.getElementById(id).style.display = 'block';
+}
+
+function hideDiv(id) {
+  document.getElementById(id).style.display = 'none';
+}
+
+function clearInput(id) {
+  document.getElementById("id").value = 0;
+}
+
+
+
+
+    //dashboard end
 document.addEventListener('DOMContentLoaded', function () {
-  const links = document.querySelectorAll('.sidebar a'); // Sidebar links only
-  const banner = document.querySelector('.banner a'); // Banner link
-  const contentArea = document.getElementById('content-area');
-
-  // Function to load a page dynamically with smooth animation
-  function loadPage(page) {
-    // Add the 'hidden' class to fade out the current content
-    contentArea.classList.add('hidden');
-
-    // Wait for the fade-out animation to complete
-    setTimeout(() => {
-      fetch(page)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.text();
-        })
-        .then(data => {
-          // Replace the content in the content area
-          contentArea.innerHTML = data;
-
-          // Re-trigger animations if needed
-          if (page === 'dashboard.html') {
-            animateNumbers();
-          }
-
-          // Remove the 'hidden' class to fade in the new content
-          contentArea.classList.remove('hidden');
-        })
-        .catch(error => {
-          console.error('There was a problem with the fetch operation:', error);
-          contentArea.innerHTML = '<p>Error loading content. Please try again later.</p>';
-          contentArea.classList.remove('hidden'); // Ensure fade-in even on error
-        });
-    }, 200); // Match the duration of the fade-out animation
-  }
-
-  // Automatically load the dashboard.html when the page loads
-  loadPage('dashboard.html');
+  
 
   // Add click event listeners to sidebar links
+  const links = document.querySelectorAll('.sidebar a');
   links.forEach(link => {
     link.addEventListener('click', function (e) {
       e.preventDefault();
@@ -1043,8 +1117,130 @@ document.addEventListener('DOMContentLoaded', function () {
       // Fetch the page specified in the data-page attribute
       const page = this.getAttribute('data-page');
       if (page) {
-        loadPage(page);
+        loadPage(page, function () {
+          if (page === 'dashboard.html') {
+            const el = document.getElementById('span1-week-budget');
+            if (el) {
+              el.innerHTML = "€123";
+            } else {
+              console.warn("Element #span1-week-budget not found");
+            }
+          }
+        });
       }
+    });
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  const links = document.querySelectorAll('.sidebar a'); // Sidebar links only
+  const banner = document.querySelector('.banner a'); // Banner link
+  const contentArea = document.getElementById('content-area');
+
+  // Function to load a page dynamically with smooth animation
+  function loadPage(page, callback) {
+  const contentArea = document.getElementById('content-area');
+
+  // Add the 'hidden' class to fade out the current content
+  contentArea.classList.add('hidden');
+
+  // Wait for the fade-out animation to complete
+  setTimeout(() => {
+    fetch(page)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.text();
+      })
+      .then(data => {
+        // Replace the content in the content area
+        contentArea.innerHTML = data;
+
+        // Re-trigger animations if needed
+        if (page === 'dashboard.html') {
+          animateNumbers();
+        }
+
+        // Remove the 'hidden' class to fade in the new content
+        contentArea.classList.remove('hidden');
+
+        // Run the callback function if provided
+        if (typeof callback === 'function') {
+          callback();
+        }
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        contentArea.innerHTML = '<p>Error loading content. Please try again later.</p>';
+        contentArea.classList.remove('hidden'); // Ensure fade-in even on error
+      });
+  }, 200); // Match the duration of the fade-out animation
+}
+
+  // Automatically load the dashboard.html when the page loads
+  loadPage('dashboard.html', function () {
+    const el1 = document.getElementById('span1-week-budget');
+    const el2 = document.getElementById('span2-week-budget');
+    if (el1 && el2) {
+      //WEEKLY BUDGET VALUE
+      el1.innerHTML = "€" + 20000;
+
+      //WEEKLY REMAINING VALUE
+      el2.innerHTML = "€" + 5000000;
+    } else {
+      console.warn("Element #span1|2-week-budget not found");
+    }
+
+    const budgetForm = document.getElementById('budget-edit-input-form');
+    const weeklyBudgetInput = document.getElementById('weeklyBudgetInput');
+    const weeklyRemainingInput = document.getElementById('weeklyRemainingInput');
+    const span1 = document.getElementById('span1-week-budget');
+    const span2 = document.getElementById('span2-week-budget');
+
+    // Handle form submission
+    budgetForm.addEventListener('submit', function (e) {
+      e.preventDefault(); // Prevent the form from refreshing the page
+
+      // Get the input values
+      const weeklyBudget = parseFloat(weeklyBudgetInput.value);
+      const weeklyRemaining = parseFloat(weeklyRemainingInput.value);
+
+      if (!isNaN(weeklyBudget) && !isNaN(weeklyRemaining)) {
+        // Update the data-target attributes
+        span1.setAttribute('data-target', weeklyBudget);
+        span2.setAttribute('data-target', weeklyRemaining);
+
+        // Optionally update the displayed values immediately
+        span1.textContent = `€${weeklyBudget.toLocaleString()}`;
+        span2.textContent = `€${weeklyRemaining.toLocaleString()}`;
+
+        // Re-trigger animations if needed
+        animateNumbers();
+
+        // Hide the edit form and show the weekly budget box
+        hideDiv('weeklyBudgetBoxEdit');
+        showDiv('weeklyBudgetBox');
+      } else {
+        console.error('Invalid input values for weekly budget or remaining.');
+      }
+    });
+    
+    
+  });
+  
+  // Add click event listeners to sidebar links
+  links.forEach(link => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      // Remove 'active' class from all sidebar items
+      document.querySelectorAll('.sidebar ul li').forEach(li => li.classList.remove('active'));
+
+      // Add 'active' class to the clicked item
+      this.parentElement.classList.add('active');
+
+    
     });
   });
 
@@ -1138,43 +1334,10 @@ document.addEventListener('DOMContentLoaded', function () {
   fetchTranslations('en');
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-  const weeklyDate = document.getElementById('week-display');
-  const prevWeekButton = document.getElementById('prevWeek');
-  const nextWeekButton = document.getElementById('nextWeek');
 
-  // Initialize the current week (example: starting from the current date)
-  let currentWeek = new Date();
-
-  // Function to format the date as "01 May - 07 May"
-  function formatWeek(date) {
-    const options = { day: '2-digit', month: 'short' };
-    const startOfWeek = new Date(date);
-    startOfWeek.setDate(date.getDate() - date.getDay()); // Start of the week (Sunday)
-    const endOfWeek = new Date(startOfWeek);
-    endOfWeek.setDate(startOfWeek.getDate() + 6); // End of the week (Saturday)
-    return `${startOfWeek.toLocaleDateString('en-GB', options)} - ${endOfWeek.toLocaleDateString('en-GB', options)}`;
-  }
-
-  // Update the weekly date display
-  function updateWeeklyDate() {
-    weeklyDate.textContent = formatWeek(currentWeek);
-  }
-
-  // Event listeners for the arrow buttons
-  prevWeekButton.addEventListener('click', function () {
-    currentWeek.setDate(currentWeek.getDate() - 7); // Go back one week
-    updateWeeklyDate();
-  });
-
-  nextWeekButton.addEventListener('click', function () {
-    currentWeek.setDate(currentWeek.getDate() + 7); // Go forward one week
-    updateWeeklyDate();
-  });
-
-  // Initialize the weekly date display
-  updateWeeklyDate();
-});
 </script>
+<script src="profile.js"></script>
+
+
   </body>
 </html>
