@@ -45,6 +45,9 @@
     box-sizing: border-box; /* Include padding in the height calculation */
   }
 
+  button {
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+  }
   /* Header fisso in cima alla pagina */
   header {
     position: fixed;
@@ -147,6 +150,41 @@
     max-height: 10px; /* Fixed height */
     background: #f5f5f5;
     border-radius: 18px;   
+  }
+  
+  .transaction-buttons button {
+
+    border-radius: 30%; /* Rounded corners */
+    
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Font size */
+    
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+  }
+
+  .transaction-buttons button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+
+
+
+  .transactions-settings {
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Vertically center all items */
+    justify-content: space-between; /* Distribute items evenly */
+    max-height: 40px; /* Fixed height */
+    border-radius: 18px;  
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);       
+    gap: 13px;
+    min-width: 1320px;
+    max-width: 1320px;
+    width: 100%;
+    margin-top: 40px;
+    margin-left: 75px;
+    background: white;
+    border-radius: 24px;
+    padding: 10px;
+
   }
   /* Wrapper per le statistiche */
   .stats-wrapper {
@@ -262,6 +300,27 @@
     color: white;
   }
   
+  /* Ensure all budget edit boxes have the same size as the Weekly Budget Box */
+  .stat-box.active-revenue.fade {
+    min-height: 150px; /* Match the height of the Weekly Budget Box */
+    max-width: 300px; /* Match the width of the Weekly Budget Box */
+    width: 100%; /* Ensure it adapts to the container */
+    box-sizing: border-box; /* Include padding and border in the size */
+  }
+
+  .budget-edit-box {
+    min-height: 150px; /* Match the height of the Weekly Budget Box */
+    max-width: 300px; /* Match the width of the Weekly Budget Box */
+    width: 100%; /* Ensure it adapts to the container */
+    box-sizing: border-box; /* Include padding and border in the size */
+    background-color: #f5f5f5; /* Optional: Match the background color */
+    border-radius: 18px; /* Match the border radius */
+    padding: 20px; /* Add padding for consistent spacing */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Space out the content */
+  }
+  
   /* Numero delle dashboard */
   .dashboard-number {
     font-size: 34px; /* Adjust font size */
@@ -323,6 +382,7 @@
     background: #0148b9; /* Scrollbar track (background) color */
   }
 
+  
   /* Icona nella stat-box */
   .icon-box {
     position: absolute;
@@ -390,7 +450,7 @@
     margin-top: 25px;
     margin-left: 30px;
     padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
     border-radius: 24px;
     width: 100%;
     min-width: 995px;
@@ -402,7 +462,7 @@
     margin-top: 25px;
     margin-left: 30px;
     padding: 15px; /* Reduce padding */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
     border-radius: 24px;
     min-width: 1340px;
     max-width: 1340px;
@@ -420,7 +480,7 @@
 
   /* Impostazioni per la tabella */
   table {
-    
+    background: white;
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
@@ -439,7 +499,12 @@
     background: #f5f5f5;
     color: rgb(0, 0, 0);
   }
-
+  .styled-table td:last-child {
+  display: flex; /* Use flexbox for alignment */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  gap: 10px; /* Add spacing between buttons */
+  }
   /* Stile per il bottone */
   button {
     background: #007bff;
@@ -594,7 +659,7 @@
     
     
   }
-
+  
   .cancel-button {
     margin-top: 10px;
     background-color: #024bb5;
@@ -719,6 +784,23 @@
     align-items: center;
     justify-content: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .transactions-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    width: 40px; /* Fixed width */
+    height: 40px; /* Fixed height */
+    border-radius: 35%;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    padding: 0 13px;
+
   }
 
   .month-button {

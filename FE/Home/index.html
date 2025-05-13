@@ -100,7 +100,49 @@
     let monthlyRemaining = monthlyBudget - transactions;
     let annualRemaining = annualBudget - transactions;
 
-    
+    // Automatically calculate average expenses
+    let weeklyAverageExpense = 7; // Example: divide total transactions by 7 days
+    let dailyAverageExpense = 30; // Example: divide total transactions by 30 days
+
+    // Variables for Monthly Incomes and Expenses
+    let monthlyIncome = 3000; // Initial monthly income
+    let monthlyExpense = 1500; // Initial monthly expense
+
+    // Function to update Monthly Incomes and Expenses
+    function updateMonthlyIncomesAndExpenses() {
+      const incomeSpan = document.querySelector('#monthlyIncomes .animated-number span');
+      const expenseSpan = document.querySelector('#monthlyExpenses .animated-number span');
+
+      if (incomeSpan) {
+        incomeSpan.textContent = `+ €${monthlyIncome.toLocaleString()}`;
+        incomeSpan.setAttribute('data-target', monthlyIncome.toFixed(2));
+      }
+
+      if (expenseSpan) {
+        expenseSpan.textContent = `- €${monthlyExpense.toLocaleString()}`;
+        expenseSpan.setAttribute('data-target', monthlyExpense.toFixed(2));
+      }
+    }
+
+
+
+    // Function to update average expenses content
+    function updateAverageExpensesContent() {
+      const weeklyAverageElement = document.getElementById('averageWeekly');
+      const dailyAverageElement = document.getElementById('averageDaily');
+
+      if (weeklyAverageElement) {
+        weeklyAverageElement.textContent = `€${weeklyAverageExpense.toFixed(2)}`;
+        weeklyAverageElement.setAttribute('data-target', weeklyAverageExpense.toFixed(2));
+      }
+
+      if (dailyAverageElement) {
+        dailyAverageElement.textContent = `€${dailyAverageExpense.toFixed(2)}`;
+        dailyAverageElement.setAttribute('data-target', dailyAverageExpense.toFixed(2));
+      }
+    }
+
+  
 
     // Function to load pages dynamically
     function loadPage(page, callback) {
@@ -175,6 +217,11 @@
         animateContent(budgetElements.annual, annualBudget);
         animateContent(remainingElements.annual, annualRemaining);
       }
+
+      updateMonthlyIncomesAndExpenses();
+      // Update average expenses
+      updateAverageExpensesContent();
+      
     }
 
     // Function to handle budget edit form submission
