@@ -1,0 +1,51 @@
+
+  <style>
+    body {
+      
+      
+      
+      padding: 2rem;
+    }
+
+    
+
+    .charts-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .chart-container {
+      flex: 1 1 300px;
+      max-width: 350px;
+      background: white;
+      padding: 1rem;
+      border-radius: 16px;
+      box-shadow: 0 2px 10px rgba(0, 0, 100, 0.1);
+    }
+
+    canvas {
+      width: 100% !important;
+      height: auto !important;
+    }
+  </style>
+</head>
+<body>
+  <h2>Analisi Finanziaria</h2>
+
+  <div class="charts-wrapper" id="grafici-container">
+    <div class="chart-container">
+      <canvas id="pieChart"></canvas>
+    </div>
+    <div class="chart-container">
+      <canvas id="lineChart"></canvas>
+    </div>
+    <div class="chart-container">
+      <canvas id="barChart"></canvas>
+    </div>
+  </div>
+
+  
+</body>
+</html>

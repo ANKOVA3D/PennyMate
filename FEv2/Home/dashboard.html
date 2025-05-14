@@ -1,0 +1,398 @@
+<div class = "budget-settings">
+  <section class = "budget-settings-title">
+    <h2>Budget Settings</h2>
+  </section>
+</div>
+<div class="stats-wrapper">
+  <section class="stats-week">
+    
+    <div class="week-title">     
+      <h3 id="weekly-name">Weekly Statistics</h3>
+      
+    </div>
+
+    <div class="stat-date">
+      
+      <button class="calendar-button">
+        <i class="fas fa-calendar-alt"></i>
+      </button>
+
+      <h3 id="weekly-date">01 May - 07 May</h3>
+      <div class="arrow-buttons">
+        <button class="arrow-button" id="prevWeek">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        <button class="arrow-button" id="nextWeek">
+          <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  
+
+    <!-- Stat Box 1 -->
+    <div class="stat-box active-revenue fade show" id="weeklyBudgetBox">
+      <h3>Weekly Budget / Remaining</h3>
+      <div class="dashboard-number">
+        <p class="animated-number">€0</p> / <p class="animated-number">€0</p>
+      </div>
+      <div class="button-group">
+        <button onclick="hideDiv('weeklyBudgetBox'); showDiv('weeklyBudgetBoxEdit');" class="settings-button">
+          <i class="fas fa-edit"></i> <!-- Font Awesome gear icon -->
+        </button>
+      </div>
+    </div>
+
+    <div class="stat-box active-revenue fade" id="weeklyBudgetBoxEdit" style="display:none">
+      <form id="weekly-budget-edit-input-form">
+        <section class="week-budget-edit">
+          <div class="week-budget-edit-title">
+            <h3>Change Weekly Budget</h3>
+          </div>
+          <div class="dashboard-number">
+            <input type="number" id="weeklyBudgetInput" name="weeklyBudget" class="budget-edit-input" required />
+          </div>
+        </section>
+        <div class="button-group">
+          <button type="reset" onclick="hideDiv('weeklyBudgetBoxEdit'); showDiv('weeklyBudgetBox');" class="cancel-button">
+            <i class="fas fas fa-times"></i> <!-- Font Awesome x icon -->
+          </button>
+          <button type="submit" class="confirm-button">
+            <i class="fas fa-check"></i> <!-- Font Awesome check icon -->
+          </button>
+        </div>
+      </form>
+    </div>
+
+    
+    <!-- Stat Box 1 -->
+    <div class="stat-box">
+      <h3>Average Weekly and Daily Expenses</h3>
+      <section class = "average-expenses">
+        
+        <div class="dashboard-number">
+          <p class="animated-number">
+            <span data-target="30.67">€0.0</span>
+          </p>
+        </div>
+        <div class = "average-title">
+          <h3>Per Week</h3>
+        </div>
+        <div class="dashboard-number">
+          <p class="animated-number">
+            <span data-target="12.4">€0.0</span>
+          </p>
+        </div>
+        <div class = "average-title">
+          <h3>Per Day</h3>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="stats-month">
+    
+    <div class="week-title">     
+      <h3 id="weekly-name">Monthly Statistics</h3>
+      
+    </div>
+
+    <div class="stat-date">
+      
+      <button class="month-button">
+        Jan
+      </button>
+      <button class="month-button">
+        Feb
+      </button>
+      <button class="month-button">
+        Mar
+      </button>
+      <button class="month-button">
+        Apr
+      </button>
+      <button class="month-button">
+        May
+      </button>
+      <button class="month-button">
+        Jun
+      </button>
+      <button class="month-button">
+        Jul
+      </button>
+      <button class="month-button">
+        Aug
+      </button>
+      <button class="month-button">
+        Sep
+      </button>
+      <button class="month-button">
+        Oct
+      </button>
+      <button class="month-button">
+        Nov
+      </button>
+      <button class="month-button">
+        Dec
+      </button>
+      
+      
+    </div>
+    <section class ="stat-box-month">
+    <!-- Stat Box 1 -->
+    
+      <div class="stat-box active-revenue fade show" id="monthlyBudgetBox">
+        <h3>Monthly Budget / Remaining</h3>
+        <div class="dashboard-number">
+          <p class="animated-number">€0</p> / <p class="animated-number">€0</p>
+        </div>
+        <div class="button-group">
+          <button onclick="hideDiv('monthlyBudgetBox'); showDiv('monthlyBudgetBoxEdit');" class="settings-button">
+            <i class="fas fa-edit"></i> <!-- Font Awesome gear icon -->
+          </button>
+        </div>
+      </div>
+
+      <div class="stat-box active-revenue fade" id="monthlyBudgetBoxEdit" style="display:none">
+        <form id="monthly-budget-edit-input-form">
+          <section class="month-budget-edit">
+            <div class="month-budget-edit-title">
+              <h3>Change Monthly Budget</h3>
+            </div>
+            <div class="dashboard-number">
+              <input type="number" id="monthlyBudgetInput" name="monthlyBudget" class="budget-edit-input" required />
+            </div>
+          </section>
+          <div class="button-group">
+            <button type="reset" onclick="hideDiv('monthlyBudgetBoxEdit'); showDiv('monthlyBudgetBox');" class="cancel-button">
+              <i class="fas fas fa-times"></i>
+            </button>
+            <button type="submit" class="confirm-button">
+              <i class="fas fa-check"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      
+      <div class="stat-box"  style="display: none;">
+        <h3 id="monthlyExpensesTitle">Monthly Incomes and Expenses</h3>
+        <section class = "month-expenses-incomes">
+          <div class = "arrow-expenses-incomes">
+            <i class="fas fa-arrow-up growth-icon"></i>
+          </div>
+          <div class="dashboard-number">
+            <p class="animated-number">
+              <span data-target="300">+ €0</span>
+            </p>
+          </div>
+          <div class = "arrow-expenses-incomes">
+            <i class="fas fa-arrow-down growth-icon"></i>
+          </div>
+          <div class="dashboard-number">
+            <p class="animated-number">
+              <span data-target="300">- €0</span>
+            </p>
+          </div>
+        </section>
+      </div>
+    
+    
+      
+    
+   
+      <div class="stat-box" style="display: none;">
+        <h3>Categoria con Spesa Maggiore</h3>
+        <section class = "stat-frequent-category">
+          <div class = "category-title">
+            <h3>Category:</h3>
+          </div>
+          <h3>Servizi</h3>
+          <div class = "category-title">
+            <h3>Importo:</h3>
+          </div>
+          <div class="dashboard-number">
+            <p class="animated-number">
+              <span data-target="12.4">€0.0</span>
+            </p>
+          </div>
+          <div class = "category-title">
+            <h3>Impact:</h3>
+          </div>
+          <div class="dashboard-number">
+            <p class="animated-number">
+              <span data-target="30.3">0.0%</span>
+            </p>
+          </div>
+          
+        </section>
+      </div>
+      <div class="stat-box" style="display: none;">
+        <h3>Categoria con Spesa Maggiore</h3>
+        <section class = "stat-frequent-category">
+          <div class = "category-title">
+            <h3>Category:</h3>
+          </div>
+          <h3>Servizi</h3>
+          <div class = "category-title">
+            <h3>Importo:</h3>
+          </div>
+          <div class="dashboard-number">
+            <p class="animated-number">
+              <span data-target="12.4">€0.0</span>
+            </p>
+          </div>
+          <div class = "category-title">
+            <h3>Impact:</h3>
+          </div>
+          <div class="dashboard-number">
+            <p class="animated-number">
+              <span data-target="30.3">0.0%</span>
+            </p>
+          </div>
+          
+        </section>
+      </div>
+      </section>
+      </section>
+   
+  </section>
+  <section class="stats-week">
+    
+    <div class="week-title">     
+      <h3 id="weekly-name">Annual Statistics</h3>
+      
+    </div>
+
+    <div class="stat-date">
+      
+      <button class="calendar-button">
+        <i class="fas fa-calendar-alt"></i>
+      </button>
+      <h3 id="annual-date">2024 Jan - Dec</h3>
+      <div class="arrow-buttons">
+        <button class="arrow-button" id="prevWeek">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        <button class="arrow-button" id="nextWeek">
+          <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  
+    <!-- Stat Box 1 -->
+    <div class="stat-box active-revenue fade show" id="annualBudgetBox">
+      <h3>Annual Budget / Remaining</h3>
+      <div class="dashboard-number">
+        <p class="animated-number">€0</p> / <p class="animated-number">€0</p>
+      </div>
+      <div class="button-group">
+        <button onclick="hideDiv('annualBudgetBox'); showDiv('annualBudgetBoxEdit');" class="settings-button">
+          <i class="fas fa-edit"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="stat-box active-revenue fade" id="annualBudgetBoxEdit" style="display:none">
+      <form id="annual-budget-edit-input-form">
+        <section class="annual-budget-edit">
+          <div class="annual-budget-edit-title">
+            <h3>Change Annual Budget</h3>
+          </div>
+          <div class="dashboard-number">
+            <input type="number" id="annualBudgetInput" name="annualBudget" class="budget-edit-input" required />
+          </div>
+        </section>
+        <div class="button-group">
+          <button type="reset" onclick="hideDiv('annualBudgetBoxEdit'); showDiv('annualBudgetBox');" class="cancel-button">
+            <i class="fas fas fa-times"></i>
+          </button>
+          <button type="submit" class="confirm-button">
+            <i class="fas fa-check"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    
+    <!-- Stat Box 5 -->
+    <div class="stat-box" style="display: none;"> 
+      <h3>Placeholder</h3>
+      <section class = "average-expenses">
+        
+        <div class="dashboard-number">
+          <p class="animated-number">
+            <span data-target="30.67">€0.0</span>
+          </p>
+        </div>
+        <div class = "average-title">
+          <h3>Per Week</h3>
+        </div>
+        <div class="dashboard-number">
+          <p class="animated-number">
+            <span data-target="12.4">€0.0</span>
+          </p>
+        </div>
+        <div class = "average-title">
+          <h3>Per Day</h3>
+        </div>
+      </section>
+    </div>
+  </section>
+ 
+</div>
+
+
+
+<!-- Transactions Section -->
+<section class="transactions">
+  <h2>Client Transactions Table</h2>
+  <table class="styled-table">
+        <thead>
+          <tr>
+            <th>ID No</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody id="transactionsTable">
+          <!-- Popolato dinamicamente -->
+        </tbody>
+    </tbody>
+  </table>
+</section>
+
+
+
+<script>
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const animatedNumbers = document.querySelectorAll('.animated-number');
+
+  animatedNumbers.forEach((numberElement) => {
+    const target = +numberElement.getAttribute('data-target'); // Get the target number
+    const duration = 1000; // Animation duration in milliseconds
+    const increment = target / (duration / 16); // Increment per frame (assuming ~60fps)
+
+    let current = 0;
+
+    function updateNumber() {
+      current += increment;
+      if (current >= target) {
+        numberElement.textContent = `€${target.toLocaleString()}`;
+      } else {
+        numberElement.textContent = `€${Math.floor(current).toLocaleString()}`;
+        requestAnimationFrame(updateNumber);
+      }
+    }
+
+    updateNumber();
+  });
+  
+
+});
+
+</script>
+
