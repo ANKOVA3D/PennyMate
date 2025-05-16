@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Financial Dashboard</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="sidebar.css" />
+  <link rel="stylesheet" href="general.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<section class="main-structure">
+  <div class="sidebar">
+    <div class="banner">
+      <a href="index.html" data-page="dashboard.html">
+        <img src="images/banner_vert.png" alt="Banner" style="width: 100%; height: 80px; object-fit: contain;" />
+      </a>
+    </div>
+    <nav>
+      <h4>Menu</h4>
+      <ul>
+        <li class="active"><a href="#" id="overviewLink" data-page="dashboard.html"><i class="fas fa-home"></i> Overview</a></li>
+        <li><a href="#" id="analyticsLink" data-page="analytics.html"><i class="fas fa-chart-line"></i> Analytics</a></li>
+        <li><a href="#" id="profileLink" data-page="profile_edit.html"><i class="fas fa-user-edit"></i> Edit Profile</a></li>
+      </ul>
+    </nav>
+    <div class="support">
+      
+      
+      <h4>Support</h4>
+      <ul>
+        <li><a href="support.html" id="helpLink"><i class="far fa-question-circle"></i> Help</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <header>
+      <h1>Dashboard</h1>
+      <div class="header-right">
+        
+        <div class="user-profile">
+          <span id="userNameDisplay">Utente</span>
+        </div>
+        <div class="language-changer">
+          <select id="languageSelect">
+            <option value="en" selected>English</option>
+            <option value="it">Italiano</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+          </select>
+        </div>
+      </div>
+    </header>
+    
+    <div id="content-area"></div>
+  </div>
+</section>
+
+<script src="analytics.js"></script>
+<script src="budget.js"></script>
+<script src="script.js"></script>
+<script src="profile.js"></script>
+<script>
+  // Function to show a div
+
+    function addNewTransaction() {
+      const category = document.getElementById("new-category").value;
+      const date = document.getElementById("new-date").value;
+      const type = JSON.parse(document.getElementById("new-type").value);
+      const amount = parseFloat(document.getElementById("new-amount").value);
+      const description = document.getElementById("new-description").value;
+
+      const transaction = {
+        category,
+        date,
+        type,
+        amount,
+        description
+      };
+
+      fetch("http://localhost:8080/transaction/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(transaction)
+      })
+        .then(res => {
+          if (res.ok) {
+            hideDiv('new-transaction');
+            // Ricarica la pagina per aggiornare tutti i dati
+            window.location.reload();
+          } else {
+            alert("Errore durante l'aggiunta della transazione.");
+          }
+        })
+        .catch(err => {
+          console.error("Errore:", err);
+          alert("Errore di rete o server.");
+        });
+    }
+
+    function showDiv(id) {
+      document.getElementById(id).style.display = 'block';
+    }
+
+    // Function to hide a div
+    function hideDiv(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    // Function to clear input
+    function clearInput(id) {
+      document.getElementById(id).value = 0;
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      const contentArea = document.getElementById('content-area');
+      const sidebarLinks = document.querySelectorAll('.sidebar a');
+      const languageSelect = document.getElementById('languageSelect');
+
+
+      
+      let transactions = 0;
+	  
+	  fetchTotals().then(totals => {
+		  if (totals) {
+			transactions = -totals;
+		  }
+		});
+
+      /*VARIABILI DA LEGGERE DAL DB QUANDO PAGINA ACCEDE
+      MEMORIZZA VALORE DAL QUERY QUI*/
+    
+    
+    let weeklyBudget, monthlyBudget, annualBudget;
+    
+    
+
+    getBudget().then(budget => {
+      if (budget) {
+        weeklyBudget = budget.week;
+        monthlyBudget = budget.month;
+        annualBudget = budget.year;
+      }
+    });
+
+  
+
+    
+    
+
+    // Function to load pages dynamically
+    function loadPage(page, callback) {
+	  me();
+      contentArea.classList.add('hidden');
+
+      setTimeout(() => {
+        fetch(page)
+          .then((res) => (res.ok ? res.text() : Promise.reject('Failed to load page')))
+          .then((html) => {
+            contentArea.innerHTML = html;
+            contentArea.classList.remove('hidden');
+
+            if (typeof callback === 'function') {
+              callback();
+            }
+          })
+          .catch((err) => {
+            contentArea.innerHTML = '<p>Error loading content.</p>';
+            contentArea.classList.remove('hidden');
+            console.error(err);
+          });
+      }, 200);
+    }
+
+    // Function to animate numbers
+    function animateContent(element, targetValue) {
+      const duration = 1000; // Animation duration in milliseconds
+      const increment = targetValue / (duration / 16); // Increment per frame (~60fps)
+      let current = 0;
+
+      const prefix = '€';
+      const suffix = '';
+
+      function updateContent() {
+        current += increment;
+        if (current >= targetValue) {
+          element.textContent = `${prefix}${targetValue.toLocaleString()}${suffix}`;
+        } else {
+          element.textContent = `${prefix}${Math.floor(current).toLocaleString()}${suffix}`;
+          requestAnimationFrame(updateContent);
+        }
+      }
+
+      updateContent();
+    }
+
+    // Function to update the dashboard content
+    function updateDashboardContent() {
+      
+      fetchTransactions();
+      let weeklyRemaining = weeklyBudget - transactions;
+      let monthlyRemaining = monthlyBudget - transactions;
+      let annualRemaining = annualBudget - transactions;
+
+      const budgetElements = {
+        weekly: document.querySelector('.dashboard-number .animated-number:nth-child(1)'),
+        monthly: document.querySelector('#monthlyBudgetBox .animated-number:nth-child(1)'),
+        annual: document.querySelector('#annualBudgetBox .animated-number:nth-child(1)'),
+      };
+      
+      const remainingElements = {
+        weekly: document.querySelector('.dashboard-number .animated-number:nth-child(2)'),
+        monthly: document.querySelector('#monthlyBudgetBox .animated-number:nth-child(2)'),
+        annual: document.querySelector('#annualBudgetBox .animated-number:nth-child(2)'),
+      };
+
+      if (budgetElements.weekly && remainingElements.weekly) {
+        animateContent(budgetElements.weekly, weeklyBudget);
+        animateContent(remainingElements.weekly, weeklyRemaining);
+      }
+
+      if (budgetElements.monthly && remainingElements.monthly) {
+        animateContent(budgetElements.monthly, monthlyBudget);
+        animateContent(remainingElements.monthly, monthlyRemaining);
+      }
+
+      if (budgetElements.annual && remainingElements.annual) {
+        animateContent(budgetElements.annual, annualBudget);
+        animateContent(remainingElements.annual, annualRemaining);
+      }
+    }
+
+    // Function to handle budget edit form submission
+    function handleBudgetEditForm(type) {
+      const budgetForm = document.getElementById(`${type}-budget-edit-input-form`);
+      const budgetInput = document.getElementById(`${type}BudgetInput`);
+
+      if (budgetForm) {
+        budgetForm.addEventListener('submit', (e) => {
+          e.preventDefault(); // Prevent form submission
+
+          /*VARIABILE newBudget DAL FORM DA SETTARE: QUANDO QUALSIASI FORM VIENE ACCETATO
+          MEMORIZZA VALORE DAL FORM QUI*/
+          const newBudget = parseFloat(budgetInput.value); // Get the input value
+
+        
+          if (!isNaN(newBudget) && newBudget >= 0) {
+            if (type === 'weekly') {
+              weeklyBudget = newBudget;
+              weeklyRemaining = weeklyBudget - transactions;
+            } else if (type === 'monthly') {
+              monthlyBudget = newBudget;
+              monthlyRemaining = monthlyBudget - transactions;
+            } else if (type === 'annual') {
+              annualBudget = newBudget;
+              annualRemaining = annualBudget - transactions;
+            }
+
+            updateBudget({
+              week: weeklyBudget,
+              month: monthlyBudget,
+              year: annualBudget
+            });
+			
+            updateDashboardContent(); // Re-trigger the animation
+            hideDiv(`${type}BudgetBoxEdit`); // Hide the edit form
+            showDiv(`${type}BudgetBox`); // Show the main budget box
+          } else {
+            console.error('Invalid budget input');
+          }
+        });
+      }
+    }
+
+    // Initialize sidebar navigation
+    sidebarLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        sidebarLinks.forEach((l) => l.parentElement.classList.remove('active'));
+        link.parentElement.classList.add('active');
+
+        const page = link.dataset.page;
+        if (page) {
+          loadPage(page, () => {
+            if (page === 'dashboard.html') {
+              me();
+              updateDashboardContent();
+              handleBudgetEditForm('weekly');
+              handleBudgetEditForm('monthly');
+              handleBudgetEditForm('annual');
+              
+            }
+            if (page === 'analytics.html') {
+              inizializzaGrafici()
+            }
+            
+          });
+        }
+      });
+    });
+
+    // Handle language selection
+    languageSelect.addEventListener('change', () => fetchTranslations(languageSelect.value));
+
+    // Load the default page (dashboard) on page load
+    loadPage('dashboard.html', () => {
+      updateDashboardContent();
+      handleBudgetEditForm('weekly');
+      handleBudgetEditForm('monthly');
+      handleBudgetEditForm('annual');
+      
+    });
+  });
+  
+  
+</script>
+
+
+
+
+
+</body>
+</html>
