@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - PennyMate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Reusing the auth styles from index.html */
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f7f7f7;
+            padding: 20px;
+        }
+
+        .auth-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .auth-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+            text-align: center;
+        }
+
+        .auth-form input {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .auth-form input:focus {
+            border-color: #0362fc;
+            outline: none;
+        }
+
+        .auth-form button {
+            width: 100%;
+            padding: 12px;
+            background: #0362fc;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .auth-switch {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+
+        .auth-switch a {
+            color: #0362fc;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .social-login {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .social-title {
+            color: #666;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .social-title::before,
+        .social-title::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background: #ddd;
+        }
+
+        .social-title::before {
+            left: 0;
+        }
+
+        .social-title::after {
+            right: 0;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .social-button:hover {
+            transform: translateY(-3px);
+        }
+
+        .facebook {
+            background: #3b5998;
+        }
+
+        .google {
+            background: #db4437;
+        }
+
+        .apple {
+            background: #000;
+        }
+
+        .terms {
+            font-size: 0.8rem;
+            color: #999;
+            text-align: center;
+            margin-top: 30px;
+            line-height: 1.5;
+        }
+
+        .auth-form input,
+        .auth-form button {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px 15px;
+            font-size: 1rem;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        /* Language Selector Styles */
+        .language-changer {
+            position: relative;
+            background-color: #d1d1d1;
+            color: rgb(0, 0, 0);
+            border-radius: 10px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .language-changer:hover {
+            background-color: #a5a5a5;
+        }
+
+        .language-changer select {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+
+        .language-changer .selected-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            pointer-events: none;
+        }
+
+        .language-changer .selected-option::after {
+            content: "▼";
+            font-size: 10px;
+            margin-left: 5px;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header style="position: sticky; top: 0; z-index: 1000;">
+        <div class="header-bg">
+            <div class="header-16-9-wrapper">
+                <div class="header-container">
+                    <a href="index.html">
+                        <img src='images/banner_horz.png' alt="Banner" class="header-banner" style="height:50px;">
+                    </a>
+                    <div class="header-right">
+                        <div class="language-changer">
+                            <select id="languageSelect">
+                                <option value="en">English</option>
+                                <option value="it" selected>Italiano</option>
+                                <option value="fr">Français</option>
+                                <option value="es">Español</option>
+                            </select>
+                            <div class="selected-option">
+                                <span>Italiano</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="auth-container">
+        <div class="auth-card" style="margin-top: -200px;">
+            <h1 class="auth-title" data-translate="signInTitle">Sign In to PennyMate</h1>
+            <form id="loginForm" class="auth-form">
+                <input type="text" id="name" placeholder="Username" data-translate-placeholder="usernamePlaceholder" required>
+                <input type="password" id="password" placeholder="Password" data-translate-placeholder="passwordPlaceholder" required>
+                <button type="submit" data-translate="loginButton">Login</button>
+            </form>
+            
+            <div class="auth-switch">
+                <span data-translate="noAccount">Don't have an account?</span> <a href="register.html" data-translate="registerLink">Register here!</a>
+            </div>
+            
+            <div class="terms" data-translate="termsText">
+                By using PennyMate you agree with our Terms of Use and Privacy Policy
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Translations data
+        const translations = {
+            "en": {
+                "signInTitle": "Sign In to PennyMate",
+                "usernamePlaceholder": "Username",
+                "passwordPlaceholder": "Password",
+                "loginButton": "Login",
+                "noAccount": "Don't have an account?",
+                "registerLink": "Register here!",
+                "termsText": "By using PennyMate you agree with our Terms of Use and Privacy Policy",
+                "currentLanguage": "English"
+            },
+            "it": {
+                "signInTitle": "Accedi a PennyMate",
+                "usernamePlaceholder": "Nome utente",
+                "passwordPlaceholder": "Password",
+                "loginButton": "Accedi",
+                "noAccount": "Non hai un account?",
+                "registerLink": "Registrati qui!",
+                "termsText": "Utilizzando PennyMate accetti i nostri Termini di Utilizzo e Privacy Policy",
+                "currentLanguage": "Italiano"
+            },
+            "fr": {
+                "signInTitle": "Connectez-vous à PennyMate",
+                "usernamePlaceholder": "Nom d'utilisateur",
+                "passwordPlaceholder": "Mot de passe",
+                "loginButton": "Connexion",
+                "noAccount": "Vous n'avez pas de compte?",
+                "registerLink": "Inscrivez-vous ici!",
+                "termsText": "En utilisant PennyMate, vous acceptez nos Conditions d'utilisation et Politique de confidentialité",
+                "currentLanguage": "Français"
+            },
+            "es": {
+                "signInTitle": "Inicia sesión en PennyMate",
+                "usernamePlaceholder": "Nombre de usuario",
+                "passwordPlaceholder": "Contraseña",
+                "loginButton": "Iniciar sesión",
+                "noAccount": "¿No tienes una cuenta?",
+                "registerLink": "¡Regístrate aquí!",
+                "termsText": "Al usar PennyMate aceptas nuestros Términos de Uso y Política de Privacidad",
+                "currentLanguage": "Español"
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const languageSelect = document.getElementById('languageSelect');
+            const selectedOptionDisplay = document.querySelector('.selected-option span');
+            
+            // Load saved language or default to browser language
+            const savedLanguage = localStorage.getItem('preferredLanguage') || navigator.language.slice(0, 2);
+            if (translations[savedLanguage]) {
+                languageSelect.value = savedLanguage;
+                updatePageLanguage(savedLanguage);
+            }
+            
+            // Handle language change
+            languageSelect.addEventListener('change', function() {
+                const selectedLanguage = this.value;
+                localStorage.setItem('preferredLanguage', selectedLanguage);
+                updatePageLanguage(selectedLanguage);
+                document.documentElement.lang = selectedLanguage;
+                selectedOptionDisplay.textContent = translations[selectedLanguage].currentLanguage;
+            });
+
+            function updatePageLanguage(language) {
+                // Update all elements with data-translate attribute
+                document.querySelectorAll('[data-translate]').forEach(element => {
+                    const key = element.getAttribute('data-translate');
+                    if (translations[language] && translations[language][key]) {
+                        element.textContent = translations[language][key];
+                    }
+                });
+                
+                // Update placeholder texts
+                document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
+                    const key = element.getAttribute('data-translate-placeholder');
+                    if (translations[language] && translations[language][key]) {
+                        element.placeholder = translations[language][key];
+                    }
+                });
+            }
+
+            // Login form submission
+            document.getElementById("loginForm").addEventListener("submit", function(event) {
+                event.preventDefault();
+                const name = document.getElementById("name").value;
+                const password = document.getElementById("password").value;
+
+                fetch("http://localhost:8080/users/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ name, password }),
+                    credentials: "include"
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Login failed");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.message.includes("success")) {
+                        window.location.href = "../../Home/index.html";
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("Login error: " + error.message);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
