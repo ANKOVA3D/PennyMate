@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<script src="/address.js"></script>
+	
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="register_title">Registrazione - PennyMate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f7f7f7;
+            padding: 20px;
+        }
+        .auth-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+        }
+        .auth-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+            text-align: center;
+        }
+        .auth-form input {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        .auth-form input:focus {
+            border-color: #6e8efb;
+            outline: none;
+        }
+        .auth-form button {
+            width: 100%;
+            padding: 12px;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            background: #6e8efb;
+            transition: all 0.3s;
+        }
+        .auth-form button:hover {
+            background: #4961c2;
+        }
+        .auth-switch {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+        .auth-switch a {
+            color: #0362fc;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .terms {
+            font-size: 0.8rem;
+            color: #999;
+            text-align: center;
+            margin-top: 30px;
+            line-height: 1.5;
+        }
+
+        .auth-form input,
+        .auth-form button {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px 15px;
+            font-size: 1rem;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+    </style>
+    <link rel="stylesheet" href="style.css" />
+    <script>
+        const translations = {
+            en: {
+                "register_title": "Sign Up - PennyMate",
+                "signup_title": "Sign Up to PennyMate",
+                "fullname_placeholder": "Full Name",
+                "email_placeholder": "Email",
+                "password_placeholder": "Password",
+                "signup_button": "Sign Up",
+                "have_account": "Already have an account?",
+                "login_link": "Log In",
+                "terms_text": "By using PennyMate you accept our Terms of Use and Privacy Policy",
+                "password_error": "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter and one number.",
+                "user_exists": "A user with this name is already registered.",
+                "registration_failed": "Registration failed.",
+                "network_error": "Network or server error."
+            },
+            it: {
+                "register_title": "Registrazione - PennyMate",
+                "signup_title": "Registrati su PennyMate",
+                "fullname_placeholder": "Nome Completo",
+                "email_placeholder": "Email",
+                "password_placeholder": "Password",
+                "signup_button": "Registrati",
+                "have_account": "Hai già un account?",
+                "login_link": "Accedi",
+                "terms_text": "Utilizzando PennyMate accetti i nostri Termini di Utilizzo e la Privacy Policy",
+                "password_error": "La password deve essere lunga almeno 8 caratteri e contenere almeno una lettera maiuscola, una minuscola e un numero.",
+                "user_exists": "Un utente con questo nome è già registrato.",
+                "registration_failed": "Registrazione fallita.",
+                "network_error": "Errore di rete o server."
+            },
+            fr: {
+                "register_title": "Inscription - PennyMate",
+                "signup_title": "Inscrivez-vous à PennyMate",
+                "fullname_placeholder": "Nom Complet",
+                "email_placeholder": "Email",
+                "password_placeholder": "Mot de Passe",
+                "signup_button": "S'inscrire",
+                "have_account": "Vous avez déjà un compte?",
+                "login_link": "Se Connecter",
+                "terms_text": "En utilisant PennyMate, vous acceptez nos Conditions d'Utilisation et Politique de Confidentialité",
+                "password_error": "Le mot de passe doit contenir au moins 8 caractères avec une majuscule, une minuscule et un chiffre.",
+                "user_exists": "Un utilisateur avec ce nom est déjà enregistré.",
+                "registration_failed": "Échec de l'inscription.",
+                "network_error": "Erreur de réseau ou serveur."
+            },
+            es: {
+                "register_title": "Registro - PennyMate",
+                "signup_title": "Regístrate en PennyMate",
+                "fullname_placeholder": "Nombre Completo",
+                "email_placeholder": "Correo Electrónico",
+                "password_placeholder": "Contraseña",
+                "signup_button": "Registrarse",
+                "have_account": "¿Ya tienes una cuenta?",
+                "login_link": "Iniciar Sesión",
+                "terms_text": "Al usar PennyMate aceptas nuestros Términos de Uso y Política de Privacidad",
+                "password_error": "La contraseña debe tener al menos 8 caracteres y contener al menos una letra mayúscula, una minúscula y un número.",
+                "user_exists": "Ya existe un usuario con este nombre.",
+                "registration_failed": "Registro fallido.",
+                "network_error": "Error de red o servidor."
+            }
+        };
+    </script>
+</head>
+<header style="position: sticky; top: 0; z-index: 1000;">
+    <div class="header-bg">
+      <div class="header-16-9-wrapper">
+        <div class="header-container">
+          <a href="/index.html">
+            <img src='images/banner_horz.png' alt="Banner" class="header-banner" style="height:50px;">
+          </a>
+          <div class="header-right">
+            <div class="language-changer">
+              <select id="languageSelect">
+                <option value="en">English</option>
+                <option value="it" selected>Italiano</option>
+                <option value="fr">Français</option>
+                <option value="es">Español</option>
+              </select>
+              <div class="selected-option">
+                <span>Italiano</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+<body>
+    <div class="auth-container">
+        <div class="auth-card" style="margin-top: -200px;">
+            <h1 class="auth-title" data-translate="signup_title">Registrati su PennyMate</h1>
+            <form id="registerForm" class="auth-form">
+                <input type="text" id="nome" placeholder="Nome Completo" data-translate-placeholder="fullname_placeholder" required>
+                <input type="email" id="email" placeholder="Email" data-translate-placeholder="email_placeholder" required>
+                <input type="password" id="password" placeholder="Password" data-translate-placeholder="password_placeholder" required>
+                <button type="submit" style="background-color: #0362fc;" data-translate="signup_button">Registrati</button>
+            </form>
+            <div class="auth-switch">
+                <span data-translate="have_account">Hai già un account?</span> <a href="login.html" data-translate="login_link">Accedi</a>
+            </div>
+            <div class="terms" data-translate="terms_text">
+                Utilizzando PennyMate accetti i nostri Termini di Utilizzo e la Privacy Policy
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const languageSelect = document.getElementById('languageSelect');
+            const selectedOptionDisplay = document.querySelector('.selected-option span');
+            const translations = { /* ... your translations ... */ };
+
+            // Get saved or browser language
+            const savedLanguage = localStorage.getItem('preferredLanguage') || navigator.language.slice(0, 2);
+            const initialLanguage = translations[savedLanguage] ? savedLanguage : 'en';
+
+            // Set select value and display
+            languageSelect.value = initialLanguage;
+            selectedOptionDisplay.textContent = languageSelect.options[languageSelect.selectedIndex].text;
+            document.documentElement.lang = initialLanguage;
+
+            // Update translations
+            updatePageLanguage(initialLanguage);
+
+            // On change
+            languageSelect.addEventListener('change', function() {
+                const selectedLanguage = this.value;
+                localStorage.setItem('preferredLanguage', selectedLanguage);
+                selectedOptionDisplay.textContent = this.options[this.selectedIndex].text;
+                document.documentElement.lang = selectedLanguage;
+                updatePageLanguage(selectedLanguage);
+            });
+
+            function updatePageLanguage(language) {
+                // Update all elements with data-translate attribute
+                document.querySelectorAll('[data-translate]').forEach(element => {
+                    const key = element.getAttribute('data-translate');
+                    if (translations[language] && translations[language][key]) {
+                        element.textContent = translations[language][key];
+                    }
+                });
+                // Update placeholder texts
+                document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
+                    const key = element.getAttribute('data-translate-placeholder');
+                    if (translations[language] && translations[language][key]) {
+                        element.placeholder = translations[language][key];
+                    }
+                });
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const languageSelect = document.getElementById('languageSelect');
+            const selectedOptionDisplay = document.querySelector('.selected-option span');
+            
+            // Update displayed text when language changes
+            languageSelect.addEventListener('change', function() {
+                selectedOptionDisplay.textContent = this.options[this.selectedIndex].text;
+                const selectedLanguage = this.value;
+                localStorage.setItem('preferredLanguage', selectedLanguage);
+                updatePageLanguage(selectedLanguage);
+                document.documentElement.lang = selectedLanguage;
+            });
+            
+            // Initialize displayed text
+            selectedOptionDisplay.textContent = languageSelect.options[languageSelect.selectedIndex].text;
+            
+            // Load saved language or default to browser language
+            const savedLanguage = localStorage.getItem('preferredLanguage') || navigator.language.slice(0, 2);
+            if (translations[savedLanguage]) {
+                languageSelect.value = savedLanguage;
+                updatePageLanguage(savedLanguage);
+            }
+            
+            function updatePageLanguage(language) {
+                // Update all elements with data-translate attribute
+                document.querySelectorAll('[data-translate]').forEach(element => {
+                    const key = element.getAttribute('data-translate');
+                    if (translations[language] && translations[language][key]) {
+                        element.textContent = translations[language][key];
+                    }
+                });
+                
+                // Update placeholder texts
+                document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
+                    const key = element.getAttribute('data-translate-placeholder');
+                    if (translations[language] && translations[language][key]) {
+                        element.placeholder = translations[language][key];
+                    }
+                });
+            }
+
+            // Registration form handling
+            document.getElementById("registerForm").addEventListener("submit", function(event) {
+                event.preventDefault();
+
+                const nome = document.getElementById("nome").value;
+                const email = document.getElementById("email").value;
+                const password = document.getElementById("password").value;
+
+                // Password validation
+                const passwordValid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(password);
+                if (!passwordValid) {
+                    const currentLang = languageSelect.value || 'en';
+                    alert(translations[currentLang]["password_error"]);
+                    return;
+                }
+
+                fetch("http://localhost:8080/users/register", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ name: nome, email: email, password: password })
+                })
+                .then(async response => {
+                    let data;
+                    try {
+                        data = await response.json();
+                    } catch (e) {
+                        data = {};
+                    }
+
+                    console.log("Response:", data);
+
+                    if (response.ok) {
+                        // Success: redirect
+						alert(data.message);
+                        window.location.href = "login.html";
+                    } else {
+                        const currentLang = languageSelect.value || 'en';
+                        // Show error for duplicate user or other errors
+                        if (data.message && (data.message.toLowerCase().includes("already") || data.message.toLowerCase().includes("esiste"))) {
+                            alert(translations[currentLang]["user_exists"]);
+                        } else {
+                            alert(data.message || translations[currentLang]["registration_failed"]);
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error("Errore:", error);
+                    const currentLang = languageSelect.value || 'en';
+                    alert(translations[currentLang]["network_error"]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
