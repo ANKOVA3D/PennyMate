@@ -1,6 +1,5 @@
 # Come utilizzare PennyMate
-BackEnd porta 8080
-FrontEnd porta 80
+Porte dei Servizi: BackEnd porta 8080, FrontEnd porta 80
 
 ## Colegarsi al sito
 Per utilizzare il sistema come utente è sufficiente collegarsi alla pagina: http://pennymate.3utilities.com/
