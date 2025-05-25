@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<script src="/address.js"></script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PennyMate - Frequently Asked Questions</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="general.css" />
+  <style>
+    body { /* Aggiunto per assicurare che il footer sia in basso se il contenuto è poco */
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    .main-content {
+        flex: 1; /* Fa sì che il contenuto principale occupi lo spazio disponibile */
+        margin-top: 130px;
+    }
+    .faq-container {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 2px 10px rgba(0, 0, 100, 0.1);
+      padding: 20px;
+      margin-bottom: 30px;
+      width: 750px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .faq-item {
+      margin-bottom: 25px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 20px;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .faq-question {
+      font-weight: bold;
+      font-size: 18px;
+      color: #0077b6;
+      margin-bottom: 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-question:hover {
+      color: #005b8c;
+    }
+
+    .faq-answer {
+      padding-left: 20px;
+      color: #555;
+    }
+    .faq-answer a { /* Stile per i link nelle risposte FAQ */
+        color: #0077b6;
+        text-decoration: underline;
+    }
+    .faq-answer a:hover {
+        color: #005b8c;
+    }
+
+    /* Rimosso .contact-support e .contact-button non più necessari qui */
+
+  </style>
+</head>
+<body>
+  <div class="main-content">
+    <div class="faq-header">
+      <h1><i class="fas fa-question-circle"></i> Frequently Asked Questions</h1>
+      <p>Find answers to common questions about PennyMate</p>
+    </div>
+
+    <div class="faq-container">
+      <div class="faq-item">
+        <div class="faq-question">
+          What is PennyMate? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer" style="display: none;">
+          PennyMate is a personal finance management application designed to simplify tracking of income, expenses, and budgets. It allows you to record transactions, create and modify monthly/annual budgets, and generate detailed reports with charts.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          How do I add a new transaction? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer" style="display: none;">
+          To add a new transaction:
+          <ol>
+            <li>Click on the "+" button in the Transactions section</li>
+            <li>Fill in the transaction details (category, date, type, amount, description)</li>
+            <li>Click the checkmark button to confirm</li>
+            <li>The transaction will be added to your records and reflected in your budget</li>
+          </ol>
+        </div>
+      </div>
+
+
+      <div class="faq-item">
+        <div class="faq-question">
+          How do I set or change my budget? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer" style="display: none;">
+          You can set budgets for weekly, monthly, and annual periods:
+          <ol>
+            <li>Go to the respective section (Weekly, Monthly, or Annual Statistics)</li>
+            <li>Click the edit (pencil) button</li>
+            <li>Enter your new budget amount</li>
+            <li>Click the checkmark to confirm or the X to cancel</li>
+          </ol>
+          Your remaining budget will be automatically calculated based on your transactions.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          How do I view my financial analytics? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer" style="display: none;">
+          Click on the "Analytics" tab in the sidebar menu to view various charts including:
+          <ul>
+            <li>Pie charts showing expense categories</li>
+            <li>Line charts tracking spending over time</li>
+            <li>Bar charts comparing income and expenses</li>
+          </ul>
+          These visualizations help you understand your spending patterns at a glance.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          Can I change the currency? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer" style="display: none;">
+          Yes, you can change the currency in the Budget Settings:
+          <ol>
+            <li>Click the gear icon in the Budget section</li>
+            <li>Select your preferred currency from the dropdown menu (EUR, USD, GBP)</li>
+            <li>Confirm your selection</li>
+          </ol>
+          Note that this doesn't convert existing amounts, it only changes the displayed currency symbol.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          How do I edit my profile information? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer" style="display: none;">
+          To update your profile:
+          <ol>
+            <li>Go to "Edit Profile" in the sidebar menu</li>
+            <li>Update your name, email, and/or password</li>
+            <li>Click "Save Changes" to confirm</li>
+            <li>If you don't want to change your password, leave the password field blank</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          Is my financial data secure? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer" style="display: none;">
+          PennyMate is at very early stage of development so we're still working on security features:
+          <ul>
+            <li>Important: All data is not encrypted!</li>
+            <li>Regular backups are performed to prevent data loss</li>
+            <li>The system is hosted on secure infrastructure</li>
+            <li>Data is accessible only for authorized personnel</li>
+            <li>We implement continuous monitoring</li>
+          </ul>
+          However, you should always use a strong, unique password for your account.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          Why do I see advertisements? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer" style="display: none;">
+          PennyMate is currently free to use, and advertisements help support the development and maintenance of the application. We strive to keep ads non-intrusive and relevant. If you have feedback about the advertising experience, please let us know through the support page.
+        </div>
+      </div>
+
+      <!-- Nuova FAQ per il supporto -->
+      <div class="faq-item">
+        <div class="faq-question">
+          How can I contact support? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer" style="display: none;">
+          <p>If you didn't find an answer to your question in our FAQ, you can reach out to our support team in the following ways:</p>
+          <ul>
+            
+            <li>Email us directly at: <a href="mailto:team@kbls-solutions.com">team@kbls-solutions.com</a>.</li>
+          </ul>
+          <p>We'll do our best to assist you as soon as possible!</p>
+        </div>
+      </div>
+
+    </div>
+    <!-- Sezione .contact-support rimossa da qui -->
+  </div>
+
+  <footer style="background-color: #f5f5f5; padding: 20px 0; text-align: center; color: #5e5e5e; font-size: 14px; margin-top: auto;"> 
+    <p style="margin: 0;">
+      © 2025 <strong>PennyMate</strong> |
+      <a href="../policy.html" style="color: #5e5e5e; text-decoration: underline;">Privacy Policy</a> |
+      <a href="../terms-and-conditions.html" style="color: #5e5e5e; text-decoration: underline;">Terms and Conditions</a>
+    </p>
+  </footer>
+
+  <script>
+    function toggleAnswer(element) {
+      const answer = element.nextElementSibling;
+      const icon = element.querySelector('i');
+
+      const isHidden = answer.style.display === 'none' || answer.style.display === '';
+
+      if (isHidden) {
+        answer.style.display = 'block';
+        icon.className = 'fas fa-chevron-up';
+      } else {
+        answer.style.display = 'none';
+        icon.className = 'fas fa-chevron-down';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const questions = document.querySelectorAll('.faq-question');
+      questions.forEach(question => {
+        if (question.nextElementSibling && question.nextElementSibling.classList.contains('faq-answer')) {
+            question.nextElementSibling.style.display = 'none';
+        }
+        question.addEventListener('click', function() {
+          toggleAnswer(this);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

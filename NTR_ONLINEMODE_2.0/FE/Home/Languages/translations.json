@@ -1,0 +1,42 @@
+{
+  "en": {
+    "user": "User",
+    "dashboard": "Financial Dashboard",
+    "overview": "Overview",
+    "payments": "Payments",
+    "analytics": "Analytics",
+    "services": "Services",
+    "profile": "Edit Profile",
+    "help": "Help"
+  },
+  "it": {
+    "user": "Utente",
+    "dashboard": "Dashboard Finanziario",
+    "overview": "Panoramica",
+    "payments": "Pagamenti",
+    "analytics": "Analisi",
+    "services": "Servizi",
+    "profile": "Modifica Profilo",
+    "help": "Aiuto"
+  },
+  "fr": {
+    "user": "Utilisateur",
+    "dashboard": "Tableau de Bord Financier",
+    "overview": "Aperçu",
+    "payments": "Paiements",
+    "analytics": "Analytique",
+    "services": "Services",
+    "profile": "Modifier le Profil",
+    "help": "Aide"
+  },
+  "es": {
+    "user": "Usuario",
+    "dashboard": "Panel Financiero",
+    "overview": "Resumen",
+    "payments": "Pagos",
+    "analytics": "Analítica",
+    "services": "Servicios",
+    "profile": "Editar Perfil",
+    "help": "Ayuda"
+  }
+}
