@@ -1,0 +1,74 @@
+-- phpMyAdmin SQL Dump
+-- Versione corretta con chiavi primarie e senza INSERT
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+-- Database: `pennymate`
+-- --------------------------------------------------------
+
+-- Struttura della tabella `budget`
+CREATE TABLE `budget` (
+  `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_utente` INT(11) NOT NULL,
+  `week` DECIMAL(10,2) DEFAULT NULL,
+  `month` DECIMAL(10,2) DEFAULT NULL,
+  `year` DECIMAL(10,2) DEFAULT NULL,
+  `wDate` TIMESTAMP NULL DEFAULT NULL,
+  `mDate` TIMESTAMP NULL DEFAULT NULL,
+  `yDate` TIMESTAMP NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+-- Struttura della tabella `category`
+CREATE TABLE `category` (
+  `nome` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`nome`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+-- Struttura della tabella `transactions`
+CREATE TABLE `transactions` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `user_id` INT(11) NOT NULL,
+  `amount` DECIMAL(10,2) NOT NULL,
+  `type` TINYINT(1) NOT NULL,
+  `category` VARCHAR(20) DEFAULT NULL,
+  `description` TEXT DEFAULT NULL,
+  `date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+-- Struttura della tabella `users`
+CREATE TABLE `users` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(255) NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  `password_hash` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `category` (`nome`) VALUES
+('Alimentare'),
+('Auto'),
+('Bollette'),
+('Stipendio'),
+('Svago');
+
+
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

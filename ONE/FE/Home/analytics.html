@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- Set dynamically by JS in index.html -->
+<head>
+  <script src="/address.js"></script>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="general.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      background: #f5f5f5;
+      padding: 2rem;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #0077b6;
+    }
+    .charts-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .chart-container {
+      flex: 1 1 450px;
+      background: white;
+      padding: 1rem;
+      border-radius: 25px;
+      box-shadow: 0 2px 10px rgba(0, 0, 100, 0.1);
+    }
+    .charts-title {
+      text-align: center;
+      font-size: 1.25em;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      background-color: f5f5f5; /* Note: This was 'f5f5f5' likely intended '#f5f5f5' or similar */
+      padding: 10px;
+      border-radius: 15px;
+    }
+    canvas {
+      width: 100% !important;
+      height: auto !important;
+    }
+  </style>
+</head>
+<body>
+  <h2 data-translate-key="analytics_page_main_title">Financial Analysis</h2>
+  <div style = "max-width: 1000px; margin-top: 50px;" >
+    <div class="charts-wrapper" id="grafici-container" >
+      <div class="chart-container">
+        <div class = "charts-title" data-translate-key="analytics_chart_title_annual_expense_categories">Annual Expense Categories</div>
+        <canvas id="pieChart" style = "max-height: 200px;"></canvas>
+      </div>
+      
+      <div class="chart-container">
+        <div class = "charts-title" data-translate-key="analytics_chart_title_annual_income_categories">Annual Income Categories</div>
+        <canvas id="pieChartEntrate" style = "max-height: 200px; "></canvas>
+      </div>
+
+    </div>
+    <div class="charts-wrapper" id="grafici-container-row2" > <!-- Ensure unique ID if needed, or use classes -->
+      <div class="chart-container" style = "margin-top: 15px">
+          <div class = "charts-title" data-translate-key="analytics_chart_title_annual_expenses">Annual Expenses</div>
+          <canvas id="lineChart" style = "max-height: 300px;"></canvas>
+      </div>
+      <div class="chart-container" style = "margin-top: 15px">
+          <div class = "charts-title" data-translate-key="analytics_chart_title_annual_incomes">Annual Incomes</div>
+          <canvas id="barChartEntrate" style = "max-height: 300px;"></canvas>
+      </div>
+
+    </div>
+    <div>
+      
+    </div>
+    <div class="chart-container" style = "margin-top: 15px">
+        <div class = "charts-title" data-translate-key="analytics_chart_title_income_expense_over_year">Income and Expenses Over the Year</div>
+        <canvas id="lineChartEntrateUscite" style = "max-height: 300px;"></canvas>
+    </div>
+    
+  </div>
+  <footer style="background-color: #f5f5f5; padding: 20px 0; text-align: center; color: #5e5e5e; font-size: 14px; margin-top: 75px;"> 
+    <p style="margin: 0;">
+      <span data-translate-key="footer_copyright">© 2025 PennyMate</span> |
+      <a href="../policy.html" style="color: #5e5e5e; text-decoration: underline;" data-translate-key="footer_privacy_policy">Privacy Policy</a> |
+      <a href="../terms-and-conditions.html" style="color: #5e5e5e; text-decoration: underline;" data-translate-key="footer_terms_conditions">Terms and Conditions</a>
+    </p>
+  </footer>
+  
+  <!-- analytics.js is loaded in index.html. Its inizializzaGrafici function needs to use getTranslation -->
+  <!-- No local script tag needed here for analytics.js if it's already globally included -->
+</body>
+</html>

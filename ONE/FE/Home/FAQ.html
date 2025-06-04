@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- Set dynamically by JS in index.html -->
+<head>
+	<script src="/address.js"></script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-translate-key="faq_page_title">PennyMate - Frequently Asked Questions</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="general.css" />
+  <style>
+    body { 
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    .main-content {
+        flex: 1; 
+        margin-top: 80px;
+        margin-left: 120px;
+    }
+    .faq-container {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 2px 10px rgba(0, 0, 100, 0.1);
+      padding: 20px;
+      margin-bottom: 30px;
+      width: 750px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .faq-item {
+      margin-bottom: 25px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 20px;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .faq-question {
+      font-weight: bold;
+      font-size: 18px;
+      color: #0077b6;
+      margin-bottom: 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-question:hover {
+      color: #005b8c;
+    }
+
+    .faq-answer {
+      padding-left: 20px;
+      color: #555;
+    }
+    .faq-answer a { 
+        color: #0077b6;
+        text-decoration: underline;
+    }
+    .faq-answer a:hover {
+        color: #005b8c;
+    }
+    .faq-answer strong { /* This style will apply to <strong> tags rendered by innerHTML */
+        font-weight: bold;
+        color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="main-content">
+    <div class="faq-header" style="text-align: center;  margin-bottom: 20px; margin-left: 120px;">
+      <h1><i class="fas fa-question-circle"></i> <span data-translate-key="faq_main_title">Frequently Asked Questions</span></h1>
+      <p data-translate-key="faq_subtitle">Find answers to common questions about PennyMate</p>
+    </div>
+
+    <div class="faq-container">
+      <div class="faq-item">
+        <div class="faq-question">
+          <span data-translate-key="faq_q1">What is PennyMate?</span> <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer" style="display: none;" data-translate-key="faq_a1">
+          PennyMate is a personal finance management application designed to simplify tracking of income, expenses, and budgets. It allows you to record transactions, create and modify monthly/annual/weekly budgets, and generate detailed reports with charts.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span data-translate-key="faq_q2">How do I add a new transaction?</span> <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer" style="display: none;">
+          <p data-translate-key="faq_a2_intro">To add a new transaction:</p>
+          <ol>
+            <li data-translate-key="faq_a2_l1">Click on the "+" button in the Transactions section</li>
+            <li data-translate-key="faq_a2_l2">Fill in the transaction details (category, date, type, amount, description)</li>
+            <li data-translate-key="faq_a2_l3">Click the checkmark button to confirm</li>
+            <li data-translate-key="faq_a2_l4">The transaction will be added to your records and reflected in your budget</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span data-translate-key="faq_q3_updated">How do budgets and transaction statistics work?</span> <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer" style="display: none;">
+          <p data-translate-key="faq_a3_intro"></p> 
+          <ol>
+            <li data-translate-key="faq_a3_l1"></li> 
+            <li data-translate-key="faq_a3_l2"></li> 
+            <li data-translate-key="faq_a3_l3"></li> 
+            <li data-translate-key="faq_a3_l4"></li> 
+          </ol>
+          <p data-translate-key="faq_a3_outro"></p> 
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span data-translate-key="faq_q4">How do I view my financial analytics?</span> <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer" style="display: none;">
+          <p data-translate-key="faq_a4_intro">Click on the "Analytics" tab in the sidebar menu to view various charts including:</p>
+          <ul>
+            <li data-translate-key="faq_a4_l1">Pie charts showing expense categories</li>
+            <li data-translate-key="faq_a4_l2">Line charts tracking spending over time</li>
+            <li data-translate-key="faq_a4_l3">Bar charts comparing income and expenses</li>
+          </ul>
+          <p data-translate-key="faq_a4_outro">These visualizations help you understand your spending patterns at a glance.</p>
+        </div>
+      </div>
+
+     
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span data-translate-key="faq_q6">How do I edit my profile information?</span> <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer" style="display: none;">
+          <p data-translate-key="faq_a6_intro">To update your profile:</p>
+          <ol>
+            <li data-translate-key="faq_a6_l1">Go to "Edit Profile" in the sidebar menu</li>
+            <li data-translate-key="faq_a6_l2">Update your name, email, and/or password</li>
+            <li data-translate-key="faq_a6_l3">Click "Save Changes" to confirm</li>
+            <li data-translate-key="faq_a6_l4">If you don't want to change your password, leave the password field blank</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span data-translate-key="faq_q7">Is my financial data secure?</span> <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer" style="display: none;">
+          <p data-translate-key="faq_a7_intro">PennyMate is at very early stage of development so we're still working on security features, at the moment we implemented these security measures:</p>
+          <ul>
+            <li data-translate-key="faq_a7_l1">Your data is encrypted</li>
+            <li data-translate-key="faq_a7_l2">Regular backups are performed to prevent data loss</li>
+            <li data-translate-key="faq_a7_l3">The system is hosted on secure infrastructure</li>
+            <li data-translate-key="faq_a7_l4">Data is accessible only for authorized personnel</li>
+            <li data-translate-key="faq_a7_l5">We implement continuous monitoring</li>
+          </ul>
+          <p data-translate-key="faq_a7_outro">However, you should always use a strong, unique password for your account.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span data-translate-key="faq_q8">Why do I see advertisements?</span> <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer" style="display: none;" data-translate-key="faq_a8">
+          PennyMate is currently free to use, and advertisements help support the development and maintenance of the application. We strive to keep ads non-intrusive and relevant. If you have feedback about the advertising experience, please let us know through the support page.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span data-translate-key="faq_q_contact">How can I contact support?</span> <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer" style="display: none;">
+          <p data-translate-key="faq_a_contact_intro">If you didn't find an answer to your question in our FAQ, you can reach out to our support team in the following ways:</p>
+          <ul>
+            <li><span data-translate-key="faq_a_contact_email_intro">Email us directly at:</span> <a href="mailto:team@kbls-solutions.com">team@kbls-solutions.com</a>.</li>
+          </ul>
+          <p data-translate-key="faq_a_contact_outro">We'll do our best to assist you as soon as possible!</p>
+        </div>
+      </div>
+
+    </div>
+    <footer style="background-color: #f5f5f5; padding: 20px 0; text-align: center; color: #5e5e5e; font-size: 14px; margin-left: 120px; margin-top: auto; text-align: center; "> 
+    <p style="margin: 0;">
+      <span data-translate-key="footer_copyright">© 2025 PennyMate</span> |
+      <a href="../policy.html" style="color: #5e5e5e; text-decoration: underline;" data-translate-key="footer_privacy_policy">Privacy Policy</a> |
+      <a href="../terms-and-conditions.html" style="color: #5e5e5e; text-decoration: underline;" data-translate-key="footer_terms_conditions">Terms and Conditions</a>
+    </p>
+  </footer>
+  </div>
+
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            const answer = item.querySelector('.faq-answer');
+            const icon = question.querySelector('i');
+
+            if (answer) { 
+                answer.style.display = 'none';
+            }
+            if (icon) { 
+                 icon.classList.remove('fa-chevron-up');
+                 icon.classList.add('fa-chevron-down');
+            }
+
+            if (question) { 
+                question.addEventListener('click', () => {
+                    if (answer && icon) { 
+                        const isVisible = answer.style.display === 'block';
+                        answer.style.display = isVisible ? 'none' : 'block';
+                        icon.classList.toggle('fa-chevron-down', isVisible);
+                        icon.classList.toggle('fa-chevron-up', !isVisible);
+                    }
+                });
+            }
+        });
+        // applyTranslations might be called from index.html after this content is loaded.
+        // If FAQ.html were standalone, you'd call applyTranslations here too.
+    });
+  </script>
+</body>
+</html>
